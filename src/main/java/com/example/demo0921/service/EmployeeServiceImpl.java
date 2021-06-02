@@ -39,5 +39,10 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeDao.save(employee);
     }
 
+    @Override
+    public Employee queryUserByName(String lastName) {
+        return employeeDao.queryUserByName(lastName);
+    }
+
 
 }

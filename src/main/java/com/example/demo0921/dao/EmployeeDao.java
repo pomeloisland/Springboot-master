@@ -4,10 +4,7 @@ package com.example.demo0921.dao;
 
 import com.example.demo0921.pojo.Department;
 import com.example.demo0921.pojo.Employee;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,6 +30,7 @@ public interface EmployeeDao {
     //添加员工
     int save(Employee employee);
 
+    Employee queryUserByName(@Param("lastName") String lastName);
 //    //模拟数据库数据
 //    private static Map<Integer, Employee> employees = null;
 //

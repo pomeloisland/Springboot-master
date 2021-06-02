@@ -3,28 +3,23 @@ package com.example.demo0921.controller;
 
 import com.example.demo0921.pojo.Department;
 import com.example.demo0921.pojo.Employee;
-<<<<<<< HEAD
+
 import com.example.demo0921.service.DepartmentService;
 import com.example.demo0921.service.EmployeeService;
-=======
-import com.example.demo0921.pojo.User;
-import com.example.demo0921.service.DepartmentService;
-import com.example.demo0921.service.EmployeeService;
-import com.example.demo0921.service.UserService;
->>>>>>> 9b86991 (Initial commit)
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
+
 import java.util.Collection;
-=======
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
->>>>>>> 9b86991 (Initial commit)
+
+
 
 @Controller
 public class EmployeeController {
@@ -85,8 +80,7 @@ public class EmployeeController {
         employeeService.delete(id);
         return "redirect:/emps";
     }
-<<<<<<< HEAD
-=======
+
     @RequestMapping("/userQuery")
     public String userQuery(String lastName,Model model){
 
@@ -102,6 +96,6 @@ public class EmployeeController {
         model.addAttribute("emps", list);
         return "emp/list";
     }
->>>>>>> 9b86991 (Initial commit)
+
 
 }

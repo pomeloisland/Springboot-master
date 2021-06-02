@@ -1,6 +1,7 @@
 package com.example.demo0921.service;
 
 import com.example.demo0921.pojo.Employee;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -24,4 +25,6 @@ public interface EmployeeService {
 
     //添加员工
     int save(Employee employee);
+
+    Employee queryUserByName(@Param("userName") String userName);
 }

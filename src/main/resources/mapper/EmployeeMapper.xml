@@ -45,4 +45,8 @@
                 birth = #{birth}
             where id = #{id};
     </update>
+    <select id="queryUserByName" parameterType="String" resultMap="employee">
+        select *
+        from mybatis.employee where last_name like '%${lastName}%';
+    </select>
 </mapper>

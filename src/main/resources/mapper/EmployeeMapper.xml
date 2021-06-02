@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo0921.dao.EmployeeDao">
+
+    <select id="getAll" resultMap="employee">
+        select *
+        from mybatis.employee;
+    </select>
+
+    <resultMap id="employee" type="com.example.demo0921.pojo.Employee">
+        <result property="lastName" column="last_name"/>
+        <result property="departmentId" column="department_id"/>
+        <association property="department" column="department_id" javaType="com.example.demo0921.pojo.Employee" select="getDepartments"/>
+    </resultMap>
+
+    <select id="getDepartments" resultMap="department">
+        select *
+        from mybatis.department where id = #{id};
+    </select>
+    <resultMap id="department" type="com.example.demo0921.pojo.Department">
+        <result property="departmentName" column="name"/>
+    </resultMap>
+
+    <delete id="delete" parameterType="int">
+        delete
+        from mybatis.employee
+                 where id = #{id};
+    </delete>
+
+    <insert id="save" parameterType="com.example.demo0921.pojo.Employee">
+        insert into mybatis.employee(id, last_name, email, gender,department_id ,birth)
+        values (#{id},#{lastName},#{email},#{gender},#{departmentId},#{birth});
+    </insert>
+
+    <select id="getEmployeeById" parameterType="int" resultMap="employee">
+        select *
+        from mybatis.employee where id = #{id};
+    </select>
+    <update id="update" parameterType="com.example.demo0921.pojo.Employee" keyProperty="id">
+        update mybatis.employee
+            set last_name = #{lastName},
+                email = #{email},
+                gender = #{gender},
+                department_id = #{departmentId},
+                birth = #{birth}
+            where id = #{id};
+    </update>
+</mapper>

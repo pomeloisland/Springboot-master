@@ -56,7 +56,7 @@ public class LoginController {
     //注销功能
     @RequestMapping("/user/logout")
     public String logout(HttpSession session) {
-//删除session会话
+        //删除session会话
         session.invalidate();
         return "redirect:/index.html";
     }

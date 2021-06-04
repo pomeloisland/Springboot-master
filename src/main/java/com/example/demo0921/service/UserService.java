@@ -5,4 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserService {
     User queryUserByUserName(@Param("userName") String userName);
+
+    int addUser(User user);
 }

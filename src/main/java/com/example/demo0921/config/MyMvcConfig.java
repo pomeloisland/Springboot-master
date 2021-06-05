@@ -30,6 +30,6 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //addPathPatterns("/**")值拦截所有请求       excludePathPatterns("/index.html","/","/user/login")放行那些请求
         registry.addInterceptor(new LoginHandlerInterceptor())
-                .addPathPatterns("/**").excludePathPatterns("/index.html", "/","/toRegist","/user/regist", "/user/login", "/css/*", "/js/**", "/img/**");
+                .addPathPatterns("/**").excludePathPatterns("/index.html", "/","/toRegist","/user/regist", "/user/logout","/user/login", "/css/*", "/js/**", "/img/**");
     }
 }

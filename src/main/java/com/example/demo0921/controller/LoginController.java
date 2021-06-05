@@ -6,11 +6,15 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,7 +32,9 @@ public class LoginController {
             //Model回显数据     @RequestParam("username") 取值保险起见    拦截器会获取session存储的值去判断
             Model model, HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+        ByteSource salt = ByteSource.Util.bytes(username);
+        String newPs = new SimpleHash("MD5", password, salt, 1024).toHex();
+        UsernamePasswordToken token = new UsernamePasswordToken(username,newPs);
         session.setAttribute("loginUser", username);
         try{
             subject.login(token);
@@ -64,9 +70,22 @@ public class LoginController {
         return "regist";
     }
     @RequestMapping("/user/regist")
-    public String regist(User user,Model model){
+    public String regist(User user){
+        // 将用户名作为盐值
+        ByteSource salt = ByteSource.Util.bytes(user.getUsername());
+        /*
+         * MD5加密：
+         * 使用SimpleHash类对原始密码进行加密。
+         * 第一个参数代表使用MD5方式加密
+         * 第二个参数为原始密码
+         * 第三个参数为盐值，即用户名
+         * 第四个参数为加密次数
+         * 最后用toHex()方法将加密后的密码转成String
+         * */
+        String newPs = new SimpleHash("MD5", user.getPassword(), salt, 1024).toHex();
+        user.setPassword(newPs);
         userService.addUser(user);
-        return "redirect:/index.html";
+        return "index";
     }
     //注销功能
     @RequestMapping("/user/logout")

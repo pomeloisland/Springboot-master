@@ -9,6 +9,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRealm extends AuthorizingRealm {
@@ -31,6 +32,14 @@ public class UserRealm extends AuthorizingRealm {
         Subject currentSubject = SecurityUtils.getSubject();
         Session session = currentSubject.getSession();
         session.setAttribute("loginUser",user);
-        return new SimpleAuthenticationInfo(user,user.getPassword(),"");
+        ByteSource salt = ByteSource.Util.bytes(user.getUsername());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+                user,//安全数据
+                user.getPassword(),//密码
+                salt,
+                getName()
+        );
+        return authenticationInfo;
+//        return new SimpleAuthenticationInfo(user,user.getPassword(),"");
     }
 }

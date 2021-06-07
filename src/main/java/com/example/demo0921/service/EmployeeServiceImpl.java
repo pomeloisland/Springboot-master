@@ -40,8 +40,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee queryUserByName(String lastName) {
-        return employeeDao.queryUserByName(lastName);
+    public Employee queryUserByName(String lastName,String email) {
+        return employeeDao.queryUserByName(lastName,email);
     }
 
 

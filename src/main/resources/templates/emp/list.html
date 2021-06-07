@@ -94,7 +94,7 @@
                         <!--									 通过#dates.format(emp.getBirth(),'yyy-MM-dd HH:mm:ss')的方式来改变获取过来的不规范时间的显示-->
                         <td th:text="${#dates.format(emp.getBirth(),'yyy-MM-dd')}"></td>
                         <td>
-                            <!--										 通过@{/emp/id=(${emp.getId()})}获取列表id数据，还可以通过@{/emp/(${emp.getId()})}方式-->
+                            <!--	通过@{/emp/id=(${emp.getId()})}获取列表id数据，还可以通过@{/emp/(${emp.getId()})}方式-->
                             <a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.getId()}">编辑</a>
                             <a class="btn btn-sm btn-danger" th:href="@{/delemp/}+${emp.getId()}">删除</a>
                         </td>

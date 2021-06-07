@@ -26,5 +26,5 @@ public interface EmployeeService {
     //添加员工
     int save(Employee employee);
 
-    Employee queryUserByName(@Param("userName") String userName);
+    Employee queryUserByName(String userName,String  email);
 }

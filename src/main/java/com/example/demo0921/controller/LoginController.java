@@ -85,7 +85,7 @@ public class LoginController {
         String newPs = new SimpleHash("MD5", user.getPassword(), salt, 1024).toHex();
         user.setPassword(newPs);
         userService.addUser(user);
-        return "index";
+        return "redirect:/index.html";
     }
     //注销功能
     @RequestMapping("/user/logout")

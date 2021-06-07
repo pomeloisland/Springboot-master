@@ -82,13 +82,11 @@ public class EmployeeController {
     }
 
     @RequestMapping("/userQuery")
-    public String userQuery(String lastName,Model model){
+    public String userQuery(String lastName,String email,Model model){
 
-        Employee employee = employeeService.queryUserByName(lastName);
-        System.out.println(employee);
+        Employee employee = employeeService.queryUserByName(lastName,email);
         Collection<Employee> list = new ArrayList<Employee>();
         list.add(employee);
-        System.out.println(list);
         if(employee == null){
             list = employeeService.getAll();
             model.addAttribute("error","未查到用户");

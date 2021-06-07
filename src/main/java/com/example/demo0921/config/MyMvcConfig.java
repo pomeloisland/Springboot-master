@@ -16,6 +16,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         //当url为  /  时跳转到index.html页面    以此类推
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");
+        registry.addViewController("/regist.html").setViewName("regist");
         registry.addViewController("/main.html").setViewName("dashboard");
     }
 
@@ -30,6 +31,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //addPathPatterns("/**")值拦截所有请求       excludePathPatterns("/index.html","/","/user/login")放行那些请求
         registry.addInterceptor(new LoginHandlerInterceptor())
-                .addPathPatterns("/**").excludePathPatterns("/index.html", "/","/toRegist","/user/regist", "/user/logout","/user/login", "/css/*", "/js/**", "/img/**");
+                .addPathPatterns("/**").excludePathPatterns("/index.html","/regist.html","/","/toRegist","/user/regist","/user/login", "/user/logout", "/css/*", "/js/**", "/img/**");
     }
+
 }

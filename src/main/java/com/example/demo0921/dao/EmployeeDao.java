@@ -30,7 +30,7 @@ public interface EmployeeDao {
     //添加员工
     int save(Employee employee);
 
-    Employee queryUserByName(@Param("lastName") String lastName);
+    Employee queryUserByName(String lastName ,String email);
 //    //模拟数据库数据
 //    private static Map<Integer, Employee> employees = null;
 //
